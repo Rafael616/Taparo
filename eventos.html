@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pizza em eventos — Táparo Artigianale</title>
+  <meta name="description" content="Pizza artesanal de longa fermentação no seu evento: pizzaiolo no local, forno elétrico móvel e rodízio sob medida.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <a href="index.html" class="logo" data-brand="name">Táparo Artigianale</a>
+
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="index.html#cardapio">Cardápio</a>
+      <a href="eventos.html" aria-current="page">Eventos</a>
+      <a href="index.html#sobre">Nossa história</a>
+      <a href="index.html#arte">A arte</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary btn-sm" href="#" data-whatsapp="event">Orçamento</a>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ TOPO DA PÁGINA ============ -->
+    <section class="hero hero--compact">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <p class="hero-tag">Pizza em eventos</p>
+          <h1>A experiência da verdadeira pizza artesanal, <em>onde o seu evento acontece.</em></h1>
+          <p class="hero-text">Na Táparo Artigianale, acreditamos que uma boa pizza vai muito além do sabor. Ela aproxima pessoas, cria momentos e transforma encontros em memórias.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#" data-whatsapp="event">Solicitar orçamento</a>
+            <a class="btn btn-ghost" href="#galeria">Ver fotos e vídeos</a>
+          </div>
+        </div>
+
+        <!-- FOTO DE CAPA: img/eventos/capa.jpg -->
+        <figure class="photo photo--tall">
+          <img src="img/eventos/capa.jpg" alt="Equipe da Táparo preparando pizzas em um evento" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ O SERVIÇO ============ -->
+    <section class="section section--sand" id="servico">
+      <div class="container split split--reverse split--top">
+        <!-- FOTO: img/eventos/pizzaiolo.jpg -->
+        <figure class="photo photo--tall sticky reveal">
+          <img src="img/eventos/pizzaiolo.jpg" alt="Pizzaiolo abrindo a massa à mão diante dos convidados" loading="lazy">
+        </figure>
+
+        <div class="prose reveal">
+          <p class="eyebrow">O serviço</p>
+          <h2>Uma experiência completa de <em>pizzaria artesanal</em></h2>
+          <p>Por isso, levamos até o seu evento uma experiência completa de pizzaria artesanal. Nossa equipe monta toda a operação no local, com forno móvel, mesas de trabalho, utensílios e ingredientes cuidadosamente selecionados, para que você aproveite cada momento enquanto nós cuidamos de tudo.</p>
+          <p>Cada pizza nasce diante dos seus convidados. Da abertura manual da massa à finalização, todo o processo acontece na hora, revelando a técnica, o cuidado e a paixão que colocamos em cada detalhe. O aroma do forno, o movimento da equipe e o preparo ao vivo fazem parte da experiência, tornando o serviço tão especial quanto as pizzas servidas.</p>
+          <p>Nossas massas passam por um longo processo de fermentação, resultando em uma pizza leve, saborosa e de alta qualidade. Tudo é preparado para oferecer uma experiência autêntica, acolhedora e inesquecível.</p>
+          <p>Seja em casamentos, aniversários, eventos corporativos ou celebrações especiais, a Táparo Artigianale leva até você a essência da pizza artesanal italiana, proporcionando um serviço completo, elegante e memorável para você e seus convidados.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ O QUE LEVAMOS ============ -->
+    <section class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">O que levamos</p>
+          <h2>Tudo o que o seu evento precisa</h2>
+        </header>
+
+        <div class="cards">
+          <article class="card reveal">
+            <h3>Pizzaiolo no local</h3>
+            <p>Nossa equipe prepara cada pizza na hora, na sua frente.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Forno elétrico móvel</h3>
+            <p>Levamos toda a estrutura: forno e utensílios.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Rodízio sob medida</h3>
+            <p>Cardápio personalizado para o tamanho e estilo do seu evento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALERIA (fotos e vídeos vêm do config.js → EVENT_MEDIA) ============ -->
+    <section class="section section--sand" id="galeria">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Galeria</p>
+          <h2>Fotos e vídeos</h2>
+        </header>
+
+        <div class="gallery" id="eventGallery"></div>
+      </div>
+    </section>
+
+    <!-- ============ CHAMADA FINAL ============ -->
+    <section class="section">
+      <div class="container cta-box reveal">
+        <h2>Vamos levar a Táparo ao <em>seu evento?</em></h2>
+        <p class="muted">Conte a data, o local e o número de convidados para receber um orçamento.</p>
+        <a class="btn btn-primary" href="#" data-whatsapp="event">Solicitar orçamento</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ RODAPÉ (dados vêm do config.js) ============ -->
+  <footer class="footer" id="contato">
+    <div class="container footer-grid">
+      <div>
+        <p class="logo" data-brand="name"></p>
+        <p class="muted" data-brand="slogan"></p>
+      </div>
+      <div>
+        <h4>Endereço</h4>
+        <p class="muted pre-line" data-brand="address"></p>
+        <p class="muted" data-brand="phone"></p>
+        <a href="#" data-whatsapp="contact">WhatsApp</a>
+      </div>
+      <div>
+        <h4>Siga-nos</h4>
+        <a data-brand-href="instagram" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Táparo Artigianale. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

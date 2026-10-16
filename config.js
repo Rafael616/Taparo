@@ -51,3 +51,19 @@ const MENU = [
   { id: 5, name: "Pepperoni",              desc: "Fatias de pepperoni e muçarela.",         price: 54, image: "img/pepperoni.jpg" },
   { id: 6, name: "Chocolate com morango",  desc: "Chocolate e morangos frescos.",           price: 48, image: "img/chocolate-morango.jpg" },
 ];
+
+/* ---------------------------------------------------------
+   GALERIA DA PÁGINA DE EVENTOS (eventos.html)
+   Para adicionar uma foto ou vídeo, copie uma linha e mude o caminho.
+   Tipos: "photo", "video" (arquivo MP4) e "youtube" (só o código do vídeo).
+   Se o arquivo ainda não existir, aparece um espaço reservado.
+   Vídeos ocupam o dobro da largura; a grade se ajusta sozinha.
+   --------------------------------------------------------- */
+const EVENT_MEDIA = [
+  { type: "video", src: "video/evento-01.mp4", poster: "img/eventos/video-01.jpg", alt: "Pizzaiolo preparando pizzas durante um evento" },
+  { type: "photo", src: "img/eventos/foto-01.jpg", alt: "Abertura manual da massa no evento" },
+  { type: "photo", src: "img/eventos/foto-02.jpg", alt: "Forno móvel em funcionamento" },
+  { type: "photo", src: "img/eventos/foto-03.jpg", alt: "Pizzas saindo do forno" },
+  { type: "photo", src: "img/eventos/foto-04.jpg", alt: "Convidados aproveitando o rodízio" },
+  // { type: "youtube", id: "CODIGO_DO_VIDEO", alt: "Descrição do vídeo" },
+];

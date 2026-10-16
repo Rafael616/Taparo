@@ -1,19 +1,23 @@
 PASTA DE IMAGENS
 ================
-Coloque as fotos aqui, com estes nomes (ou mude os nomes em config.js):
+Coloque as fotos aqui, com estes nomes (ou mude os nomes em config.js e nos HTMLs).
 
-  margherita.jpg
-  calabresa.jpg
-  quatro-queijos.jpg
-  frango-requeijao.jpg
-  pepperoni.jpg
-  chocolate-morango.jpg
-  massa.jpg      -> foto da seção "Nossa história"
-  evento.jpg     -> foto da seção "Eventos"
+PÁGINA INICIAL
+  margherita.jpg, calabresa.jpg, quatro-queijos.jpg,
+  frango-requeijao.jpg, pepperoni.jpg, chocolate-morango.jpg
+        -> fotos das pizzas, quadradas (ex.: 800 x 800 px), vistas de cima
+  massa.jpg
+        -> foto da seção "Nossa história", retrato (ex.: 800 x 1000 px)
+
+PÁGINA DE EVENTOS  (pasta img/eventos/)
+  capa.jpg        -> foto grande do topo, retrato (ex.: 800 x 1000 px)
+  pizzaiolo.jpg   -> foto ao lado do texto, retrato (ex.: 800 x 1000 px)
+  foto-01.jpg ... foto-04.jpg   -> galeria
+  video-01.jpg    -> imagem de capa do vídeo (a que aparece antes do play)
+
+  Para ter mais fotos na galeria, copie uma linha em config.js (EVENT_MEDIA).
 
 Dicas
-- Fotos das pizzas: quadradas (ex.: 800 x 800 px), vistas de cima.
-- massa.jpg e evento.jpg: retrato (ex.: 800 x 1000 px).
 - Formato JPG ou WebP, idealmente abaixo de 150 KB cada
   (use squoosh.app para reduzir o tamanho).
 - Se um arquivo não existir, o site mostra um espaço reservado bege

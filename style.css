@@ -3,7 +3,7 @@
    Índice: 1 Cores e medidas · 2 Base · 3 Botões · 4 Header
            5 Hero e massa · 6 Faixa de diferenciais · 7 Fotos
            8 Seções · 9 Cardápio · 10 Rodapé · 11 Carrinho
-           12 Animações · 13 Responsivo
+           12 Animações · 13 Responsivo · 14 Textos longos, cards e eventos
    ========================================================= */
 
 /* ---------- 1. CORES E MEDIDAS (edite aqui) ---------- */
@@ -45,6 +45,7 @@
 
   /* Ícone mostrado quando a foto ainda não existe */
   --photo-placeholder: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%232f5d3a' stroke-width='2' stroke-linecap='round' opacity='.5'%3E%3Ccircle cx='50' cy='50' r='34'/%3E%3Cpath d='M50 16v68M16 50h68M26 26l48 48M74 26L26 74'/%3E%3C/svg%3E");
+  --video-placeholder: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%232f5d3a' stroke-width='2' stroke-linejoin='round' opacity='.5'%3E%3Ccircle cx='50' cy='50' r='34'/%3E%3Cpath d='M42 36l24 14-24 14z'/%3E%3C/svg%3E");
 }
 
 /* ---------- 2. BASE ---------- */
@@ -150,7 +151,8 @@ p + p { margin-top: 1rem; }
   background: var(--sand) var(--photo-placeholder) center / 38% no-repeat;
 }
 .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.photo img.is-broken { display: none; }
+.photo .is-broken { display: none; }
+.photo :is(video, iframe) { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; }
 .photo--square { aspect-ratio: 1; }
 .photo--tall   { aspect-ratio: 4 / 5; }
 
@@ -206,7 +208,6 @@ p + p { margin-top: 1rem; }
 .drawer-body { flex: 1; overflow-y: auto; padding: 1.5rem; }
 .drawer-foot { display: grid; gap: 1rem; padding: 1.5rem; border-top: 1px solid var(--line); }
 .total { display: flex; justify-content: space-between; }
-.foot-note { font-size: .8rem; color: var(--muted); }
 
 .empty { padding-top: 3rem; text-align: center; color: var(--muted); }
 .empty strong { display: block; margin-bottom: .25rem; color: var(--text); }
@@ -267,4 +268,47 @@ p + p { margin-top: 1rem; }
 }
 @media (max-width: 600px) {
   .facts-grid { grid-template-columns: 1fr; gap: 1rem; }
+}
+
+/* ---------- 14. TEXTOS LONGOS, CARDS E PÁGINA DE EVENTOS ---------- */
+.split--top { align-items: start; }
+.sticky { position: sticky; top: calc(var(--header-h) + 2rem); }
+.prose p { max-width: 62ch; }
+.lead { font-size: 1.25rem; }
+.pullquote { max-width: 56ch; margin-top: 2rem; padding-left: 1.25rem; border-left: 2px solid var(--green); font-family: var(--font-display); font-size: 1.4rem; line-height: 1.4; }
+
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.card { padding: 2rem; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--green); border-radius: var(--radius); }
+.card p { color: var(--muted); }
+
+.cta-strip { padding: 3.5rem 0; }
+.cta-strip .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.cta-strip h2 { margin: 0; }
+.cta-box { max-width: 640px; text-align: center; }
+.cta-box .btn { margin-top: 1.75rem; }
+
+.btn-sm { padding: .5rem 1rem; font-size: .9rem; }
+.nav a[aria-current="page"] { color: var(--text); }
+
+/* página de eventos */
+.hero--compact { min-height: auto; padding-bottom: 5rem; }
+.hero--compact h1 { max-width: 20ch; font-size: clamp(2.1rem, 4.4vw, 3.5rem); }
+.hero--compact .photo { max-width: 420px; justify-self: center; width: 100%; }
+
+/* galeria: células de altura fixa; vídeos ocupam duas colunas */
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 240px; grid-auto-flow: dense; gap: 1rem; }
+.gallery .photo { height: 100%; }
+.media-wide { grid-column: span 2; }
+.photo--video { background: var(--sand) var(--video-placeholder) center / 22% no-repeat; }
+
+@media (max-width: 860px) {
+  .cards { grid-template-columns: 1fr; }
+  .sticky { position: static; }
+  .cta-strip .container { flex-direction: column; align-items: flex-start; }
+  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 190px; }
+  .hero--compact { padding-bottom: 3rem; }
+}
+@media (max-width: 600px) {
+  .gallery { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+  .media-wide { grid-column: auto; }
 }
