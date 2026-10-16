@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Táparo Artigianale — Pizza Artesanal</title>
+  <meta name="description" content="Pizza de longa fermentação (48 h). Monte seu pedido e envie pelo WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <a href="#top" class="logo" data-brand="name">Táparo Artigianale</a>
+
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#sobre">Nossa história</a>
+      <a href="#arte">A arte</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="cart-btn" id="cartOpen" aria-label="Abrir pedido">
+        Pedido <span class="cart-count" data-cart-count>0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO: a fermentação é o tema ============ -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <p class="hero-tag">Pizza de longa fermentação</p>
+          <h1>Pizza que descansa <em>48 horas</em> antes de chegar à sua mesa.</h1>
+          <p class="hero-text">Massa leve, aromática e de sabor profundo. Escolha seus sabores e envie o pedido pelo WhatsApp.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#cardapio">Ver cardápio</a>
+            <a class="btn btn-ghost" href="#arte">Como fazemos a massa</a>
+          </div>
+        </div>
+
+        <!-- A massa cresce enquanto o relógio vai de 0 até o total de horas -->
+        <figure class="dough" id="dough" title="Clique para ver de novo">
+          <svg viewBox="0 0 320 320" role="img" aria-label="Massa crescendo durante a fermentação">
+            <defs>
+              <radialGradient id="doughFill" cx="45%" cy="38%" r="70%">
+                <stop offset="0" style="stop-color: var(--dough-light)"/>
+                <stop offset="1" style="stop-color: var(--dough-dark)"/>
+              </radialGradient>
+            </defs>
+            <circle class="ring-track" cx="160" cy="160" r="150"/>
+            <circle class="ring-progress" cx="160" cy="160" r="150"/>
+            <g class="dough-body" id="doughBody">
+              <path class="dough-shape" fill="url(#doughFill)"
+                    d="M160 58 C205 55 252 90 258 140 C264 190 230 250 170 260 C105 270 62 230 60 172 C58 112 105 60 160 58Z"/>
+              <ellipse class="dough-shine" cx="128" cy="112" rx="34" ry="16" transform="rotate(-25 128 112)"/>
+              <g id="bubbles"></g>
+            </g>
+          </svg>
+          <div class="dough-clock" aria-hidden="true">
+            <span id="doughHours">00</span>
+            <small>horas</small>
+          </div>
+          <figcaption id="doughCaption">Mistura da massa</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ DIFERENCIAIS ============ -->
+    <section class="facts" aria-label="Diferenciais">
+      <div class="container facts-grid">
+        <div><strong>48 h</strong><span>de fermentação natural</span></div>
+        <div><strong>À mão</strong><span>massa aberta sem rolo</span></div>
+        <div><strong>Na hora</strong><span>assada só depois do seu pedido</span></div>
+      </div>
+    </section>
+
+    <!-- ============ CARDÁPIO (gerado a partir do config.js) ============ -->
+    <section class="section section--sand" id="cardapio">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Cardápio</p>
+          <h2>Escolha seus sabores</h2>
+          <p>Todas as pizzas usam a mesma massa, com 48 horas de fermentação.</p>
+        </header>
+
+        <div class="menu-grid" id="menuGrid"></div>
+
+        <div class="menu-cta">
+          <button class="btn btn-primary" id="showCart">
+            Mostrar carrinho <span class="cart-count cart-count--light" data-cart-count>0</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EVENTOS ============ -->
+    <section class="section" id="eventos">
+      <div class="container split split--reverse">
+        <figure class="photo photo--tall reveal">
+          <img src="img/evento.jpg" alt="Pizza sendo preparada em um evento" loading="lazy">
+        </figure>
+
+        <div class="reveal">
+          <p class="eyebrow">No seu evento</p>
+          <h2>Leve a experiência para <em>onde você estiver</em></h2>
+          <p>Na Táparo Artigianale, acreditamos que uma boa pizza vai muito além do sabor. Ela aproxima pessoas, cria momentos e transforma encontros em memórias.</p>
+
+          <ul class="feature-list">
+            <li><strong>Profissional no local</strong><span>Preparo na hora, na frente dos convidados.</span></li>
+            <li><strong>Estrutura móvel</strong><span>Forno e utensílios incluídos.</span></li>
+            <li><strong>Cardápio sob medida</strong><span>Ajustado ao tamanho do evento.</span></li>
+          </ul>
+
+          <a class="btn btn-primary" href="#" data-whatsapp="event">Solicitar orçamento para evento</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SOBRE ============ -->
+    <section class="section section--sand" id="sobre">
+      <div class="container split">
+        <div class="reveal">
+          <p class="eyebrow">Nossa história</p>
+          <h2>Título da <em>seção</em></h2>
+          <p>Parágrafo 1: conte como o negócio começou, o que motivou o fundador e qual foi o primeiro passo.</p>
+          <p>Parágrafo 2: explique o que torna o produto diferente e qual é o processo por trás dele.</p>
+          <p>Parágrafo 3: feche com a visão de futuro e os valores da marca.</p>
+        </div>
+        <figure class="photo photo--tall reveal">
+          <img src="img/massa.jpg" alt="Preparo da massa" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ A ARTE: linha do tempo da fermentação ============ -->
+    <section class="section" id="arte">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">A arte da pizza</p>
+          <h2>O tempo é o ingrediente principal</h2>
+          <p>Uma massa de longa fermentação ganha aroma, sabor e leveza enquanto descansa. Estas são as etapas, em horas.</p>
+        </header>
+
+        <ol class="steps">
+          <li class="reveal">
+            <time>0 h</time>
+            <h3>Mistura</h3>
+            <p>Farinha, água, sal e pouco fermento. Sem pressa e sem atalhos.</p>
+          </li>
+          <li class="reveal">
+            <time>12 h</time>
+            <h3>Primeiro descanso</h3>
+            <p>A massa começa a desenvolver aroma e elasticidade.</p>
+          </li>
+          <li class="reveal">
+            <time>24 h</time>
+            <h3>Porções</h3>
+            <p>Divisão em bolinhas, que seguem descansando até o ponto certo.</p>
+          </li>
+          <li class="reveal">
+            <time>48 h</time>
+            <h3>Forno</h3>
+            <p>Aberta à mão, montada na hora e assada em alta temperatura.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ RODAPÉ (dados vêm do config.js) ============ -->
+  <footer class="footer" id="contato">
+    <div class="container footer-grid">
+      <div>
+        <p class="logo" data-brand="name"></p>
+        <p class="muted" data-brand="slogan"></p>
+      </div>
+      <div>
+        <h4>Endereço</h4>
+        <p class="muted pre-line" data-brand="address"></p>
+        <p class="muted" data-brand="phone"></p>
+        <a href="#" data-whatsapp="contact">WhatsApp</a>
+      </div>
+      <div>
+        <h4>Siga-nos</h4>
+        <a data-brand-href="instagram" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Táparo Artigianale. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- ============ CARRINHO ============ -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="Seu pedido" inert>
+    <header class="drawer-head">
+      <h2>Seu pedido</h2>
+      <button id="cartClose" aria-label="Fechar pedido">×</button>
+    </header>
+
+    <form class="drawer-form" id="orderForm">
+      <div class="drawer-body">
+        <div id="cartItems"></div>
+
+        <fieldset class="field-group" id="checkoutFields" hidden>
+          <legend>Seus dados</legend>
+
+          <label class="field">
+            <span>Nome</span>
+            <input type="text" name="nome" autocomplete="name" required>
+          </label>
+
+          <div class="choice" role="radiogroup" aria-label="Retirada ou entrega">
+            <label><input type="radio" name="tipo" value="Entrega" checked><span>Entrega</span></label>
+            <label><input type="radio" name="tipo" value="Retirada"><span>Retirada</span></label>
+          </div>
+
+          <label class="field" id="addressField">
+            <span>Endereço de entrega</span>
+            <textarea name="endereco" rows="2" autocomplete="street-address" placeholder="Rua, número, bairro, complemento" required></textarea>
+          </label>
+
+          <label class="field">
+            <span>Forma de pagamento</span>
+            <select name="pagamento" id="paymentSelect" required>
+              <option value="" disabled selected>Selecione</option>
+            </select>
+          </label>
+        </fieldset>
+      </div>
+
+      <footer class="drawer-foot">
+        <div class="total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div>
+        <button class="btn btn-primary" id="checkout" type="submit" disabled>Enviar pedido pelo WhatsApp</button>
+      </footer>
+    </form>
+  </aside>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
