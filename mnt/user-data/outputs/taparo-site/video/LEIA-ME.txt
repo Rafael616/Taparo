@@ -1,0 +1,13 @@
+PASTA DE VÍDEOS
+===============
+Coloque aqui os vídeos dos eventos em MP4 (codec H.264), por exemplo:
+
+  evento-01.mp4
+
+Depois ajuste o caminho em config.js (EVENT_MEDIA, tipo "video").
+
+Dicas
+- Prefira vídeos curtos (até 1 minuto) e leves (idealmente abaixo de 15 MB).
+- Para vídeos longos, publique no YouTube e use o tipo "youtube" em
+  config.js com o código do vídeo (a parte depois de v= no endereço).
+- Se hospedar o site no Vercel, evite arquivos de vídeo muito grandes.
