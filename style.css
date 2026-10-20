@@ -295,20 +295,31 @@ p + p { margin-top: 1rem; }
 .hero--compact h1 { max-width: 20ch; font-size: clamp(2.1rem, 4.4vw, 3.5rem); }
 .hero--compact .photo { max-width: 420px; justify-self: center; width: 100%; }
 
-/* galeria: células de altura fixa; vídeos ocupam duas colunas */
-.gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 240px; grid-auto-flow: dense; gap: 1rem; }
-.gallery .photo { height: 100%; }
-.media-wide { grid-column: span 2; }
+/* galeria: cada foto e vídeo mantém a proporção original (sem cortes).
+   As mídias se distribuem em colunas, uma abaixo da outra. */
+.gallery { columns: 3; column-gap: 1rem; }
+.gallery .photo { height: auto; margin: 0 0 1rem; break-inside: avoid; }
+.gallery .photo img,
+.gallery .photo video { height: auto; object-fit: contain; }
+.gallery .photo iframe { aspect-ratio: 16 / 9; height: auto; }
+.gallery .photo:has(.is-broken) { aspect-ratio: 4 / 3; }   /* espaço reservado se faltar o arquivo */
 .photo--video { background: var(--sand) var(--video-placeholder) center / 22% no-repeat; }
 
 @media (max-width: 860px) {
   .cards { grid-template-columns: 1fr; }
   .sticky { position: static; }
   .cta-strip .container { flex-direction: column; align-items: flex-start; }
-  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 190px; }
+  .gallery { columns: 2; }
   .hero--compact { padding-bottom: 3rem; }
 }
 @media (max-width: 600px) {
-  .gallery { grid-template-columns: 1fr; grid-auto-rows: 220px; }
-  .media-wide { grid-column: auto; }
+  .gallery { columns: 1; }
 }
+
+/* ---------- Opcionais do cardápio e do carrinho ---------- */
+.extras { margin: .5rem 0 0; padding: 0; border: 0; display: grid; gap: .35rem; }
+.extras legend { padding: 0; margin-bottom: .35rem; font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.extra { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .5rem; font-size: .88rem; cursor: pointer; }
+.extra input { accent-color: var(--green); width: 16px; height: 16px; }
+.extra em { font-style: normal; color: var(--muted); font-size: .82rem; }
+.cart-extras { display: block; margin-top: .15rem; font-size: .8rem; color: var(--muted); }

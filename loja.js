@@ -17,6 +17,16 @@ $("#menuGrid").innerHTML = MENU.map((p) => `
     <div class="menu-info">
       <h3>${p.name}</h3>
       <p>${p.desc}</p>
+      ${(p.extras || []).length ? `
+      <fieldset class="extras">
+        <legend>Opcionais</legend>
+        ${p.extras.map((x, i) => `
+        <label class="extra">
+          <input type="checkbox" value="${i}">
+          <span>${x.name}</span>
+          <em>+ ${money(x.price)}</em>
+        </label>`).join("")}
+      </fieldset>` : ""}
       <span class="price">${money(p.price)}</span>
       <button class="add-btn" data-add="${p.id}">Adicionar</button>
     </div>
@@ -26,12 +36,15 @@ $("#menuGrid").innerHTML = MENU.map((p) => `
 $("#menuGrid").addEventListener("click", (e) => {
   const btn = e.target.closest("[data-add]");
   if (!btn) return;
-  flyToCart(btn.closest(".menu-item").querySelector(".photo"));
-  changeQty(Number(btn.dataset.add), 1);
+  const item = btn.closest(".menu-item");
+  const extras = $$(".extras input:checked", item).map((i) => Number(i.value));
+  flyToCart(item.querySelector(".photo"));
+  addLine(Number(btn.dataset.add), extras);
+  $$(".extras input", item).forEach((i) => (i.checked = false));
 });
 
 /* ---------- 5. CARRINHO ---------- */
-let cart = {};   // { idDaPizza: quantidade }
+let cart = {};   // { chave: { id, extras: [índices], qty } } — chave = pizza + opcionais
 
 const drawer = $("#drawer");
 const overlay = $("#overlay");
@@ -48,19 +61,34 @@ $("#cartClose").addEventListener("click", () => toggleDrawer(false));
 overlay.addEventListener("click", () => toggleDrawer(false));
 document.addEventListener("keydown", (e) => e.key === "Escape" && toggleDrawer(false));
 
-function changeQty(id, delta) {
-  cart[id] = (cart[id] || 0) + delta;
-  if (cart[id] <= 0) delete cart[id];
+const lineKey = (id, extras) => `${id}|${[...extras].sort((x, y) => x - y).join(",")}`;
+
+function addLine(id, extras = []) {
+  const key = lineKey(id, extras);
+  cart[key] = cart[key] || { id, extras: [...extras].sort((x, y) => x - y), qty: 0 };
+  changeQty(key, 1);
+}
+
+function changeQty(key, delta) {
+  if (!cart[key]) return;
+  cart[key].qty += delta;
+  if (cart[key].qty <= 0) delete cart[key];
   renderCart();
 }
 
+// Cada linha do carrinho: nome, opcionais escolhidos e valores
 const cartEntries = () =>
-  Object.entries(cart).map(([id, qty]) => ({ ...MENU.find((p) => p.id === Number(id)), qty }));
+  Object.entries(cart).map(([key, line]) => {
+    const pizza = MENU.find((p) => p.id === line.id);
+    const extras = line.extras.map((i) => pizza.extras[i]).filter(Boolean);
+    const unit = pizza.price + extras.reduce((s, x) => s + x.price, 0);
+    return { key, name: pizza.name, extras, qty: line.qty, unit, subtotal: unit * line.qty };
+  });
 
 function renderCart() {
   const entries = cartEntries();
   const count = entries.reduce((sum, i) => sum + i.qty, 0);
-  const total = entries.reduce((sum, i) => sum + i.qty * i.price, 0);
+  const total = entries.reduce((sum, i) => sum + i.subtotal, 0);
 
   $$("[data-cart-count]").forEach((el) => (el.textContent = count));
   $("#cartTotal").textContent = money(total);
@@ -70,12 +98,12 @@ function renderCart() {
   $("#cartItems").innerHTML = count
     ? entries.map((i) => `
         <div class="cart-row">
-          <span>${i.name}</span>
-          <strong>${money(i.qty * i.price)}</strong>
+          <span>${i.name}${i.extras.length ? `<small class="cart-extras">+ ${i.extras.map((x) => x.name).join(", ")}</small>` : ""}</span>
+          <strong>${money(i.subtotal)}</strong>
           <div class="qty">
-            <button type="button" data-dec="${i.id}" aria-label="Diminuir">−</button>
+            <button type="button" data-dec="${i.key}" aria-label="Diminuir">−</button>
             <span>${i.qty}</span>
-            <button type="button" data-inc="${i.id}" aria-label="Aumentar">+</button>
+            <button type="button" data-inc="${i.key}" aria-label="Aumentar">+</button>
           </div>
         </div>`).join("")
     : `<div class="empty"><strong>Seu carrinho está vazio</strong>Escolha pizzas no cardápio.</div>`;
@@ -83,8 +111,8 @@ function renderCart() {
 
 $("#cartItems").addEventListener("click", (e) => {
   const { inc, dec } = e.target.dataset;
-  if (inc) changeQty(Number(inc), 1);
-  if (dec) changeQty(Number(dec), -1);
+  if (inc) changeQty(inc, 1);
+  if (dec) changeQty(dec, -1);
 });
 
 // Animação: a foto "voa" até o botão do carrinho no header
@@ -124,10 +152,11 @@ function updateDeliveryFields() {
 form.addEventListener("change", (e) => e.target.name === "tipo" && updateDeliveryFields());
 updateDeliveryFields();
 
-// A mensagem leva só itens e quantidades; os preços ficam no site.
+// A mensagem leva itens, opcionais, valores e o total no final.
 // Para mudar o texto do pedido, edite esta função.
 function buildOrderMessage(data, entries) {
   const delivery = data.get("tipo") === "Entrega";
+  const total = entries.reduce((sum, i) => sum + i.subtotal, 0);
   return [
     "*Novo pedido*",
     "",
@@ -137,7 +166,12 @@ function buildOrderMessage(data, entries) {
     `Pagamento: ${data.get("pagamento")}`,
     "",
     "*Itens*",
-    ...entries.map((i) => `${i.qty}x ${i.name}`),
+    ...entries.flatMap((i) => [
+      `${i.qty}x ${i.name} — ${money(i.subtotal)}`,
+      ...i.extras.map((x) => `   + ${x.name} (${money(x.price)})`),
+    ]),
+    "",
+    `*Total: ${money(total)}*`,
   ].filter((line) => line !== false).join("\n");
 }
 

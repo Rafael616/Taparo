@@ -37,19 +37,41 @@ const CONFIG = {
 };
 
 /* ---------------------------------------------------------
+   OPCIONAIS (ADICIONAIS)
+   Listas reutilizáveis: cada sabor aponta para uma delas em "extras".
+   Para editar: mude o name ou o price (valor em reais, somado ao
+   preço da pizza). Para tirar um opcional, apague a linha.
+   Para um sabor ter opcionais próprios, escreva a lista direto
+   no "extras" dele. Use extras: [] para um sabor sem opcionais.
+   --------------------------------------------------------- */
+const EXTRAS_SALGADA = [
+  { name: "Palhas", price: 8 },
+  { name: "Bacon", price: 7 },
+  { name: "Queijo extra", price: 6 },
+  { name: "Azeitonas", price: 4 },
+];
+
+const EXTRAS_DOCE = [
+  { name: "Borda recheada de chocolate", price: 8 },
+  { name: "Granulado", price: 3 },
+  { name: "Leite condensado", price: 4 },
+];
+
+/* ---------------------------------------------------------
    CARDÁPIO
    Para adicionar uma pizza, copie uma linha e mude o id.
    Para trocar a foto, coloque o arquivo na pasta img/ e
    ajuste "image". Se o arquivo não existir, aparece um
    espaço reservado no lugar.
+   "extras": opcionais disponíveis para esse sabor (veja acima).
    --------------------------------------------------------- */
 const MENU = [
-  { id: 1, name: "Margherita",             desc: "Molho de tomate, muçarela e manjericão.", price: 42, image: "img/margherita.jpg" },
-  { id: 2, name: "Calabresa",              desc: "Calabresa fatiada e cebola.",             price: 46, image: "img/calabresa.jpg" },
-  { id: 3, name: "Quatro queijos",         desc: "Quatro tipos de queijo derretidos.",      price: 52, image: "img/quatro-queijos.jpg" },
-  { id: 4, name: "Frango com requeijão",   desc: "Frango desfiado e requeijão cremoso.",    price: 50, image: "img/frango-requeijao.jpg" },
-  { id: 5, name: "Pepperoni",              desc: "Fatias de pepperoni e muçarela.",         price: 54, image: "img/pepperoni.jpg" },
-  { id: 6, name: "Chocolate com morango",  desc: "Chocolate e morangos frescos.",           price: 48, image: "img/chocolate-morango.jpg" },
+  { id: 1, name: "Margherita", desc: "Molho de tomate, muçarela e manjericão.", price: 42, image: "img/margherita.jpg", extras: EXTRAS_SALGADA },
+  { id: 2, name: "Calabresa", desc: "Calabresa fatiada e cebola.", price: 46, image: "img/calabresa.jpg", extras: EXTRAS_SALGADA },
+  { id: 3, name: "Quatro queijos", desc: "Quatro tipos de queijo derretidos.", price: 52, image: "img/quatro-queijos.jpg", extras: EXTRAS_SALGADA },
+  { id: 4, name: "Frango com requeijão", desc: "Frango desfiado e requeijão cremoso.", price: 50, image: "img/frango-requeijao.jpg", extras: EXTRAS_SALGADA },
+  { id: 5, name: "Pepperoni", desc: "Fatias de pepperoni e muçarela.", price: 54, image: "img/pepperoni.jpg", extras: EXTRAS_SALGADA },
+  { id: 6, name: "Chocolate com morango", desc: "Chocolate e morangos frescos.", price: 48, image: "img/chocolate-morango.jpg", extras: EXTRAS_DOCE },
 ];
 
 /* ---------------------------------------------------------
@@ -60,10 +82,11 @@ const MENU = [
    Vídeos ocupam o dobro da largura; a grade se ajusta sozinha.
    --------------------------------------------------------- */
 const EVENT_MEDIA = [
-  { type: "video", src: "video/evento-01.mp4", poster: "img/eventos/video-01.jpg", alt: "Pizzaiolo preparando pizzas durante um evento" },
-  { type: "photo", src: "img/eventos/foto-01.jpg", alt: "Abertura manual da massa no evento" },
-  { type: "photo", src: "img/eventos/foto-02.jpg", alt: "Forno móvel em funcionamento" },
-  { type: "photo", src: "img/eventos/foto-03.jpg", alt: "Pizzas saindo do forno" },
-  { type: "photo", src: "img/eventos/foto-04.jpg", alt: "Convidados aproveitando o rodízio" },
+  { type: "video", src: "img/evento-01.mov", poster: "img/video-01.jpeg", alt: "Pizzaiolo preparando pizzas durante um evento" },
+  { type: "photo", src: "img/foto-01.jpeg", alt: "Abertura manual da massa no evento" },
+  { type: "photo", src: "img/foto-02.jpeg", alt: "Forno móvel em funcionamento" },
+  { type: "photo", src: "img/foto-03.jpeg", alt: "Pizzas saindo do forno" },
+  { type: "photo", src: "img/foto-04.jpeg", alt: "Convidados aproveitando o rodízio" },
+  { type: "photo", src: "img/foto-05.jpeg", alt: "Convidados aproveitando o rodízio" },
   // { type: "youtube", id: "CODIGO_DO_VIDEO", alt: "Descrição do vídeo" },
 ];
